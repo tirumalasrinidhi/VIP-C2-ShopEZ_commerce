@@ -1,0 +1,99 @@
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+.auth-bg { position: absolute; inset: 0; pointer-events: none; }
+.auth-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.12;
+}
+.auth-orb-1 { width: 400px; height: 400px; background: var(--primary); top: -100px; right: -100px; }
+.auth-orb-2 { width: 300px; height: 300px; background: var(--secondary); bottom: -80px; left: -60px; }
+
+.auth-card {
+  width: 100%;
+  max-width: 460px;
+  padding: 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+.auth-header { text-align: center; margin-bottom: 2rem; }
+.auth-logo {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.auth-logo span { color: var(--primary); }
+.auth-header h1 { font-size: 1.8rem; font-weight: 700; margin-bottom: 0.5rem; }
+.auth-header p { color: var(--text-secondary); font-size: 0.95rem; }
+
+.auth-form { display: flex; flex-direction: column; }
+
+/* Input with icon */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.input-wrap input {
+  padding-left: 2.75rem;
+  padding-right: 2.75rem;
+}
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  color: var(--text-muted);
+  pointer-events: none;
+  font-size: 1rem;
+  z-index: 1;
+}
+.input-toggle {
+  position: absolute;
+  right: 0.9rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 1rem;
+  transition: color 0.2s;
+  z-index: 1;
+}
+.input-toggle:hover { color: var(--text-primary); }
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.auth-footer a { color: var(--primary-light); font-weight: 600; }
+.auth-footer a:hover { color: var(--primary); }
+
+/* Demo credentials box */
+.demo-credentials {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: rgba(108,99,255,0.07);
+  border: 1px solid rgba(108,99,255,0.2);
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+.demo-title { font-weight: 600; color: var(--primary-light); margin-bottom: 0.35rem; }
+.demo-credentials code {
+  background: rgba(255,255,255,0.05);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  color: var(--accent-2);
+}
