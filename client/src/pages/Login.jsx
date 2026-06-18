@@ -85,11 +85,6 @@ const Login = () => {
           <p>Don't have an account? <Link to="/register">Create one</Link></p>
         </div>
 
-        <div className="demo-credentials">
-          <p className="demo-title">Demo Credentials</p>
-          <p>👤 User: <code>john@example.com</code> / <code>user123</code></p>
-          <p>🛡️ Admin: <code>admin@shopez.com</code> / <code>admin123</code></p>
-        </div>
       </div>
     </div>
   );

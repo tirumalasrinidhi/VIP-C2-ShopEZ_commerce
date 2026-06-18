@@ -25,7 +25,10 @@ const Dashboard = () => {
 
   if (loading) return <AdminLayout><div className="loading-screen"><div className="spinner" /></div></AdminLayout>;
 
-  const maxRevenue = Math.max(...(stats.monthlyRevenue.map(m => m.revenue) || [1]));
+  const maxRevenue = stats.monthlyRevenue.length > 0
+    ? Math.max(...stats.monthlyRevenue.map(m => m.revenue))
+    : 1;
+
 
   return (
     <AdminLayout>

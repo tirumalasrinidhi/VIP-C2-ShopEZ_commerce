@@ -46,7 +46,7 @@ const AdminLogin = () => {
             <label className="form-label">Email address</label>
             <div className="input-wrap">
               <FiMail className="input-icon" />
-              <input type="email" name="email" placeholder="admin@shopez.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
+              <input type="email" name="email" placeholder="Enter admin email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} required />
             </div>
           </div>
           <div className="form-group">
@@ -64,11 +64,7 @@ const AdminLogin = () => {
           </button>
         </form>
 
-        <div className="demo-credentials" style={{ marginTop: '1.5rem' }}>
-          <p className="demo-title">Admin Credentials</p>
-          <p>🛡️ Email: <code>admin@shopez.com</code></p>
-          <p>🔑 Password: <code>admin123</code></p>
-        </div>
+
       </div>
     </div>
   );

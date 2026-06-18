@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getProductById, createReview } from '../api/axios';
 import { useCart } from '../context/CartContext';
@@ -20,7 +20,7 @@ const ProductDetail = () => {
   const [review, setReview] = useState({ rating: 5, comment: '' });
   const [submittingReview, setSubmittingReview] = useState(false);
 
-  const fetchProduct = async () => {
+  const loadProduct = useCallback(async () => {
     try {
       setLoading(true);
       const { data } = await getProductById(id);
@@ -31,9 +31,10 @@ const ProductDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
 
-  useEffect(() => { fetchProduct(); }, [id]);
+  useEffect(() => { loadProduct(); }, [loadProduct]);
+
 
   const handleAddToCart = () => addItem(product._id, qty);
 
@@ -50,7 +51,7 @@ const ProductDetail = () => {
       await createReview(id, review);
       toast.success('Review submitted!');
       setReview({ rating: 5, comment: '' });
-      fetchProduct();
+      loadProduct();
     } catch (err) {
       toast.error(err.response?.data?.message || 'Failed to submit review');
     } finally {
@@ -64,7 +65,12 @@ const ProductDetail = () => {
   const discountedPrice = product.price - (product.price * product.discount) / 100;
   const images = product.images?.length
     ? product.images.map(i => i.startsWith('http') ? i : `http://localhost:5000${i}`)
-    : ['https://images.unsplash.com/photo-1560393464-5c69a73c5770?w=600'];
+    : [`https://placehold.co/600x500/1a1a2e/ffffff?text=${encodeURIComponent(product.name?.slice(0, 16) || 'Product')}`];
+
+  const handleImgError = (e) => {
+    e.target.onerror = null;
+    e.target.src = `https://placehold.co/600x500/1a1a2e/ffffff?text=${encodeURIComponent(product.name?.slice(0, 16) || 'Product')}`;
+  };
 
   return (
     <div className="product-detail-page page-content">
@@ -75,7 +81,7 @@ const ProductDetail = () => {
           {/* Images */}
           <div className="detail-images">
             <div className="main-image">
-              <img src={images[activeImg]} alt={product.name} />
+              <img src={images[activeImg]} alt={product.name} onError={handleImgError} />
               {product.discount > 0 && <span className="detail-badge">-{product.discount}% OFF</span>}
             </div>
             {images.length > 1 && (
@@ -86,7 +92,7 @@ const ProductDetail = () => {
                     className={`thumb ${i === activeImg ? 'active' : ''}`}
                     onClick={() => setActiveImg(i)}
                   >
-                    <img src={img} alt="" />
+                    <img src={img} alt="" onError={handleImgError} />
                   </button>
                 ))}
               </div>

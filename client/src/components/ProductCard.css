@@ -121,6 +121,20 @@
   box-shadow: 0 4px 20px rgba(59,130,246,0.4);
 }
 
+/* Wishlisted heart — pink accent, stays visible */
+.overlay-btn--wishlisted {
+  background: rgba(236, 72, 153, 0.25) !important;
+  border-color: rgba(236, 72, 153, 0.5) !important;
+  color: #f472b6 !important;
+  transform: scale(1) !important;
+}
+.overlay-btn--wishlisted:hover {
+  background: rgba(236, 72, 153, 0.4) !important;
+  border-color: rgba(236, 72, 153, 0.7) !important;
+  box-shadow: 0 4px 20px rgba(236, 72, 153, 0.4) !important;
+  transform: scale(1.1) !important;
+}
+
 /* Product Info */
 .product-info {
   padding: 1.1rem;

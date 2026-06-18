@@ -31,6 +31,16 @@ const placeOrder = async (req, res) => {
     const shippingPrice = itemsPrice > 500 ? 0 : 40;
     const totalPrice = +(itemsPrice + taxPrice + shippingPrice).toFixed(2);
 
+    // Validate stock BEFORE creating the order
+    for (const item of cart.items) {
+      const product = await Product.findById(item.product);
+      if (!product || product.stock < item.quantity) {
+        return res.status(400).json({
+          message: `"${item.name}" is out of stock or has insufficient quantity.`
+        });
+      }
+    }
+
     const order = await Order.create({
       user: req.user._id,
       items: orderItems,
@@ -53,6 +63,7 @@ const placeOrder = async (req, res) => {
     await Cart.findOneAndDelete({ user: req.user._id });
 
     res.status(201).json(order);
+
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

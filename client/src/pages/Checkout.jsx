@@ -45,6 +45,7 @@ const Checkout = () => {
     setLoading(true);
     try {
       const { data } = await placeOrder({ shippingAddress: address, paymentMethod });
+      await emptyCart(); // sync CartContext — server already deleted the cart
       toast.success('Order placed successfully!');
       navigate(`/order-confirmation/${data._id}`);
     } catch (err) {
@@ -53,6 +54,7 @@ const Checkout = () => {
       setLoading(false);
     }
   };
+
 
   return (
     <div className="checkout-page page-content">
